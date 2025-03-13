@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поднятие уровня в одиночку</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background 0.5s ease;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .buttons {
+            text-align: center;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Поднятие уровня в одиночку
+    </header>
+    <div class="container" id="content">
+        <h2>Идея создания</h2>
+        <p>Идея "Поднятие уровня в одиночку" пришла к южнокорейскому писателю Чхугонгу. Он вдохновился жанром игр с системой уровней и решил создать историю о слабом охотнике, который становится сильнейшим.</p>
+    </div>
+    <div class="buttons">
+        <button id="prev" onclick="prevContent()" style="display: none;">Назад</button>
+        <button id="next" onclick="nextContent()">Далее</button>
+    </div>
+    
+    <script>
+        let step = 0;
+        const content = document.getElementById("content");
+        const body = document.body;
+        const nextButton = document.getElementById("next");
+        const prevButton = document.getElementById("prev");
+        
+        const pages = [
+            { 
+                text: "<h2>Идея создания</h2><p>Идея \"Поднятие уровня в одиночку\" пришла к южнокорейскому писателю Чхугонгу. Он вдохновился жанром игр с системой уровней и решил создать историю о слабом охотнике, который становится сильнейшим.</p>", 
+                background: "url('https://www.hindustantimes.com/ht-img/img/2025/01/03/550x309/solo_leveling_2_1735920659700_1735920677681.jpg')" 
+            },
+            { 
+                text: "<h2>Создание манхвы</h2><p>Изначально это был веб-роман, но благодаря популярности его адаптировали в манхву. Рисовку выполнял художник Jang Sung-Rak (Dubu), а публикация велась на платформе KakaoPage.</p>", 
+                background: "url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/mixcollage-15-jan-2024-08-13-am-1376.jpg')" 
+            },
+            { 
+                text: "<h2>Почему манхва стала популярной?</h2><p>Многие читатели заинтересовались манхвой из-за динамичного сюжета, красивой рисовки и впечатляющего роста главного героя. Поклонников также привлекла мрачная атмосфера и эпичные битвы.</p>", 
+                background: "url('https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/03/sung-jin-woo-and-solo-levelling-s-monarch-war-and-final-battle-arc.jpg')" 
+            },
+            { 
+                text: "<h2>Краткий сюжет</h2><p>Действие разворачивается в мире, где появляются порталы с монстрами, а люди получают силу охотников. Сон Джину — самый слабый охотник E-ранга, но однажды он получает уникальную способность \"Система\", позволяющую ему становиться сильнее без ограничений. С этого момента он начинает свой путь к вершине.</p>", 
+                background: "url('https://staticg.sportskeeda.com/editor/2024/02/1ca1e-17079689592293-1920.jpg')" 
+            },
+            { 
+                text: "<h2>Продолжение: Поднятие уровня в одиночку - Рагнарёк</h2><p>Продолжение истории сосредоточено на сыне Сон Джину — Сон Су-Хо, который наследует силу своего отца и сталкивается с новыми врагами и испытаниями. Мир вновь оказывается в опасности, и Су-Хо предстоит пройти свой путь к силе.</p>", 
+                background: "url('https://www.hindustantimes.com/ht-img/img/2023/04/11/1600x900/solo_levelung_jinwoo_son_1681234867125_1681234882488_1681234882488.jpg')" 
+            }
+        ];
+
+        function updateContent() {
+            content.innerHTML = pages[step].text;
+            body.style.background = pages[step].background;
+            body.style.backgroundSize = "100% 100%";
+            body.style.backgroundPosition = "center";
+            body.style.backgroundRepeat = "no-repeat";
+            prevButton.style.display = step === 0 ? "none" : "inline-block";
+            nextButton.style.display = step === pages.length - 1 ? "none" : "inline-block";
+        }
+
+        function nextContent() {
+            if (step < pages.length - 1) {
+                step++;
+                updateContent();
+            }
+        }
+
+        function prevContent() {
+            if (step > 0) {
+                step--;
+                updateContent();
+            }
+        }
+    </script>
+</body>
+</html>
